@@ -1,0 +1,121 @@
+<%- include('partials/header') %>
+
+<div class="genre-detail-container">
+    <div class="genre-header">
+        <a href="/genres" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Genres
+        </a>
+        <h1><%= genre.name %></h1>
+    </div>
+
+    <div class="genre-description">
+        <p><%= genre.description %></p>
+    </div>
+
+    <div class="genre-content">
+        <% if (content && content.length > 0) { %>
+            <div class="content-count">
+                <span><i class="fas fa-film"></i> <%= content.length %> titles in this genre</span>
+            </div>
+            
+            <div class="card-grid">
+                <% content.forEach(item => { %>
+                    <a href="/<%= item.type %>/<%= item.id %>" class="card-link">
+                        <div class="card">
+                            <img src="<%= item.image %>" alt="<%= item.title %>">
+                            <div class="card-content">
+                                <h3><%= item.title %></h3>
+                                <div class="rating">
+                                    <% for (let i = 0; i < Math.floor(item.rating); i++) { %>
+                                        <i class="fas fa-star"></i>
+                                    <% } %>
+                                    <% if (item.rating % 1 !== 0) { %>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    <% } %>
+                                </div>
+                                <span class="card-type <%= item.type %>">
+                                    <i class="<%= item.type === 'anime' ? 'fas fa-dragon' : (item.type === 'movies' ? 'fas fa-film' : 'fas fa-tv') %>"></i>
+                                    <%= item.type.charAt(0).toUpperCase() + item.type.slice(1) %>
+                                </span>
+                                <p><%= item.description %></p>
+                            </div>
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>No content found for this genre.</p>
+                <a href="/genres" class="btn btn-primary">Explore Other Genres</a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<style>
+    .content-count {
+        margin-bottom: 1.5rem;
+        background-color: rgba(255, 94, 98, 0.15);
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 25px;
+        color: #ff5e62;
+        font-weight: 500;
+    }
+    
+    .content-count i {
+        margin-right: 5px;
+    }
+    
+    .card-type {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin: 0.5rem 0;
+        font-weight: 500;
+    }
+    
+    .card-type.anime {
+        background-color: rgba(108, 92, 231, 0.3);
+        color: #6c5ce7;
+    }
+    
+    .card-type.movies {
+        background-color: rgba(225, 112, 85, 0.3);
+        color: #e17055;
+    }
+    
+    .card-type.tvshows {
+        background-color: rgba(0, 184, 148, 0.3);
+        color: #00b894;
+    }
+    
+    .card-type i {
+        margin-right: 5px;
+    }
+    
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        background-color: rgba(30, 30, 40, 0.7);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .no-results i {
+        font-size: 3rem;
+        color: #ff5e62;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .no-results p {
+        font-size: 1.2rem;
+        color: #b8b8d4;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<%- include('partials/footer') %> 

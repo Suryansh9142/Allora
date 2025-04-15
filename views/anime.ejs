@@ -1,0 +1,45 @@
+<%- include('partials/header', { bgClass: 'anime-bg' }) %>
+
+<!-- Main Content Section -->
+<section class="content-section">
+    <h2>Explore the World of Anime</h2>
+    <p>Discover the best anime series from Japan and beyond. From action-packed shonen to heartwarming slice-of-life, we have it all.</p>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for anime...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <h3>Popular Anime</h3>
+    <div class="card-grid">
+        <% animeList.forEach(anime => { %>
+            <div class="card">
+                <a href="/anime/detail/<%= anime.id %>" class="card-link" id="myHeroAcdemia">
+                    <img src="<%= anime.image %>" alt="<%= anime.title %>">
+                    <div class="card-content">
+                        <h3><%= anime.title %></h3>
+                        <div class="rating">
+                            <% for(let i = 0; i < 5; i++) { %>
+                                <% if(i < anime.rating) { %>
+                                    ★
+                                <% } else { %>
+                                    ☆
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <p><%= anime.description %></p>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+    
+    <h3>Anime Genres</h3>
+    <div class="genre-tags">
+        <% genres.forEach(genre => { %>
+            <span class="genre-tag"><%= genre %></span>
+        <% }); %>
+    </div>
+</section>
+
+<%- include('partials/footer') %> 

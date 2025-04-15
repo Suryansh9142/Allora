@@ -1,0 +1,27 @@
+{
+  "name": "allora-website",
+  "version": "1.0.0",
+  "description": "A website for anime watchers",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [
+    "anime",
+    "movies",
+    "tv shows",
+    "entertainment",
+    "streaming"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

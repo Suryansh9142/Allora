@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+
+<!-- Main Content Section -->
+<section class="content-section">
+    <h2>Welcome to Allora - Your Ultimate Entertainment Hub</h2>
+    <p>Discover a world of entertainment at your fingertips. From the latest anime series to blockbuster movies and binge-worthy TV shows, Allora brings you the best content from around the globe.</p>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for titles...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <h3>Featured Content</h3>
+    <div class="card-grid">
+        <% featuredContent.forEach(item => { %>
+            <div class="card">
+                <a href="/detail/<%= item.id %>" class="card-link">
+                    <img src="<%= item.image %>" alt="<%= item.title %>">
+                    <div class="card-content">
+                        <h3><%= item.title %></h3>
+                        <div class="rating">
+                            <% for(let i = 0; i < 5; i++) { %>
+                                <% if(i < item.rating) { %>
+                                    ★
+                                <% } else { %>
+                                    ☆
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <p><%= item.description %></p>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+</section>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,45 @@
+<%- include('partials/header', { bgClass: 'movies-bg' }) %>
+
+<!-- Main Content Section -->
+<section class="content-section">
+    <h2>Discover Amazing Movies</h2>
+    <p>From blockbuster hits to indie gems, explore our vast collection of movies from around the world.</p>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for movies...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <h3>Popular Movies</h3>
+    <div class="card-grid">
+        <% moviesList.forEach(movie => { %>
+            <div class="card">
+                <a href="/movies/detail/<%= movie.id %>" class="card-link">
+                    <img src="<%= movie.image %>" alt="<%= movie.title %>">
+                    <div class="card-content">
+                        <h3><%= movie.title %></h3>
+                        <div class="rating">
+                            <% for(let i = 0; i < 5; i++) { %>
+                                <% if(i < movie.rating) { %>
+                                    ★
+                                <% } else { %>
+                                    ☆
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <p><%= movie.description %></p>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+    
+    <h3>Movie Categories</h3>
+    <div class="genre-tags">
+        <% genres.forEach(genre => { %>
+            <span class="genre-tag"><%= genre %></span>
+        <% }); %>
+    </div>
+</section>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,145 @@
+<%- include('partials/header') %>
+
+<div class="content-section detail-page">
+    <div class="detail-container">
+        <div class="detail-header">
+            <a href="javascript:history.back()" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <h1><%= item.title %></h1>
+        </div>
+        
+        <div class="detail-content">
+            <div class="detail-poster">
+                <img src="<%= item.image %>" alt="<%= item.title %>">
+                <div class="rating detail-rating">
+                    <% for(let i = 0; i < 5; i++) { %>
+                        <% if(i < item.rating) { %>
+                            ★
+                        <% } else { %>
+                            ☆
+                        <% } %>
+                    <% } %>
+                </div>
+                <div class="detail-actions">
+                    <a href="#download-section" class="btn btn-primary">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <a href="#info-section" class="btn btn-outline">
+                        <i class="fas fa-info-circle"></i> Information
+                    </a>
+                </div>
+            </div>
+            
+            <div class="detail-info">
+                <div class="detail-meta">
+                    <span class="detail-type"><%= item.type || 'Unknown' %></span>
+                    <span class="detail-year"><%= item.year || 'Unknown' %></span>
+                    <span class="detail-duration"><%= item.duration || 'Unknown' %></span>
+                </div>
+                
+                <div class="detail-description">
+                    <h3>Synopsis</h3>
+                    <p><%= item.description %></p>
+                </div>
+                
+                <% if (item.genres && item.genres.length > 0) { %>
+                <div class="detail-genres">
+                    <h3>Genres</h3>
+                    <div class="genre-tags">
+                        <% item.genres.forEach(genre => { %>
+                            <span class="genre-tag"><%= genre %></span>
+                        <% }); %>
+                    </div>
+                </div>
+                <% } %>
+                
+                <% if (item.cast && item.cast.length > 0) { %>
+                <div class="detail-cast">
+                    <h3>Cast</h3>
+                    <ul class="cast-list">
+                        <% item.cast.forEach(person => { %>
+                            <li><%= person %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+                <% } %>
+            </div>
+        </div>
+        
+        <div id="info-section" class="detail-section">
+            <h2>Additional Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <h4>Release Date</h4>
+                    <p><%= item.releaseDate || 'Unknown' %></p>
+                </div>
+                <div class="info-item">
+                    <h4>Director</h4>
+                    <p><%= item.director || 'Unknown' %></p>
+                </div>
+                <div class="info-item">
+                    <h4>Studio</h4>
+                    <p><%= item.studio || 'Unknown' %></p>
+                </div>
+                <div class="info-item">
+                    <h4>Rating</h4>
+                    <p><%= item.ageRating || 'Unknown' %></p>
+                </div>
+                <div class="info-item">
+                    <h4>Language</h4>
+                    <p><%= item.language || 'Unknown' %></p>
+                </div>
+                <div class="info-item">
+                    <h4>Subtitles</h4>
+                    <p><%= item.subtitles || 'Unknown' %></p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="download-section" class="detail-section">
+            <h2>Download Options</h2>
+            <div class="download-options">
+                <div class="download-option">
+                    <div class="download-info">
+                        <h4>HD Quality (1080p)</h4>
+                        <p>File Size: 2.1 GB</p>
+                        <p>Format: MP4</p>
+                    </div>
+                    <a href="#" class="btn btn-primary download-btn">
+                        <i class="fas fa-download"></i> Download HD
+                    </a>
+                </div>
+                
+                <div class="download-option">
+                    <div class="download-info">
+                        <h4>Medium Quality (720p)</h4>
+                        <p>File Size: 1.2 GB</p>
+                        <p>Format: MP4</p>
+                    </div>
+                    <a href="#" class="btn btn-primary download-btn">
+                        <i class="fas fa-download"></i> Download Medium
+                    </a>
+                </div>
+                
+                <div class="download-option">
+                    <div class="download-info">
+                        <h4>Low Quality (480p)</h4>
+                        <p>File Size: 700 MB</p>
+                        <p>Format: MP4</p>
+                    </div>
+                    <a href="#" class="btn btn-primary download-btn">
+                        <i class="fas fa-download"></i> Download Low
+                    </a>
+                </div>
+            </div>
+            
+            <div class="download-note">
+                <i class="fas fa-info-circle"></i>
+                <p>Note: All downloads are for personal use only. Please respect copyright laws.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %> 

@@ -1,0 +1,200 @@
+<%- include('partials/header') %>
+
+<div class="genres-container">
+    <div class="section-title">
+        <h2>Explore Genres</h2>
+        <p>Discover content based on your favorite genres</p>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="genre-search" placeholder="Search for a genre...">
+        <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <section class="genre-section">
+        <h2><i class="fas fa-fire"></i> Popular Genres</h2>
+        <div class="genre-card-grid">
+            <% popularGenres.forEach(genre => { %>
+                <div class="genre-card" data-genre="<%= genre.name.toLowerCase() %>">
+                    <a href="/genres/<%= genre.name.toLowerCase() %>" class="genre-card-link">
+                        <div class="genre-card-image">
+                            <img src="<%= genre.image %>" alt="<%= genre.name %>">
+                            <div class="genre-overlay"></div>
+                        </div>
+                        <div class="genre-card-content">
+                            <h3><%= genre.name %></h3>
+                            <p><%= genre.description %></p>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <section class="genre-section">
+        <h2><i class="fas fa-dragon"></i> Anime Genres</h2>
+        <div class="genre-card-grid">
+            <% animeGenres.forEach(genre => { %>
+                <div class="genre-card" data-genre="<%= genre.name.toLowerCase() %>">
+                    <a href="/genres/<%= genre.name.toLowerCase() %>" class="genre-card-link">
+                        <div class="genre-card-image">
+                            <img src="<%= genre.image %>" alt="<%= genre.name %>">
+                            <div class="genre-overlay"></div>
+                        </div>
+                        <div class="genre-card-content">
+                            <h3><%= genre.name %></h3>
+                            <p><%= genre.description %></p>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+
+    <section class="genre-section">
+        <h2><i class="fas fa-film"></i> Movie Genres</h2>
+        <div class="genre-card-grid">
+            <% movieGenres.forEach(genre => { %>
+                <div class="genre-card" data-genre="<%= genre.name.toLowerCase() %>">
+                    <a href="/genres/<%= genre.name.toLowerCase() %>" class="genre-card-link">
+                        <div class="genre-card-image">
+                            <img src="<%= genre.image %>" alt="<%= genre.name %>">
+                            <div class="genre-overlay"></div>
+                        </div>
+                        <div class="genre-card-content">
+                            <h3><%= genre.name %></h3>
+                            <p><%= genre.description %></p>
+                        </div>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('genre-search');
+        const genreCards = document.querySelectorAll('.genre-card');
+        const genreSections = document.querySelectorAll('.genre-section');
+        
+        // Add animation classes to cards
+        genreCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.05}s`;
+            card.classList.add('fade-in');
+        });
+        
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            let hasResults = false;
+            
+            genreCards.forEach(card => {
+                const genreName = card.dataset.genre;
+                if (genreName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Show/hide section titles based on whether they have visible cards
+            genreSections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.genre-card[style="display: block"]');
+                if (visibleCards.length === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+            
+            // Show a message if no results
+            let noResultsMsg = document.querySelector('.no-results');
+            if (!hasResults) {
+                if (!noResultsMsg) {
+                    noResultsMsg = document.createElement('p');
+                    noResultsMsg.className = 'no-results';
+                    noResultsMsg.innerHTML = '<i class="fas fa-search"></i> No genres found matching your search.';
+                    document.querySelector('.genres-container').appendChild(noResultsMsg);
+                }
+            } else if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        });
+    });
+</script>
+
+<style>
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .genre-section h2 i {
+        margin-right: 10px;
+        color: #ff5e62;
+    }
+    
+    .no-results {
+        text-align: center;
+        margin: 30px 0;
+        padding: 30px;
+        background-color: rgba(30, 30, 40, 0.7);
+        border-radius: 15px;
+        color: #fff;
+        font-size: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .no-results i {
+        display: block;
+        font-size: 2rem;
+        color: #ff5e62;
+        margin-bottom: 1rem;
+    }
+    
+    .search-container {
+        position: relative;
+        max-width: 500px;
+        margin: inherit;
+    }
+    
+    .search-container input {
+        width: 100%;
+        padding: 15px 20px;
+        padding-right: 50px;
+        border-radius: 30px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .search-container input:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 15px rgba(255, 94, 98, 0.3);
+    }
+    
+    .search-container .search-icon {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #ff5e62;
+        font-size: 1.2rem;
+    }
+</style>
+
+<%- include('partials/footer') %> 

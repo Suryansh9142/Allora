@@ -1,0 +1,45 @@
+<%- include('partials/header', { bgClass: 'tvshows-bg' }) %>
+
+<!-- Main Content Section -->
+<section class="content-section">
+    <h2>Binge-Worthy TV Shows</h2>
+    <p>Explore our collection of the most addictive TV series from around the world. From drama to comedy, we have something for everyone.</p>
+    
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search for TV shows...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </div>
+    
+    <h3>Popular TV Shows</h3>
+    <div class="card-grid">
+        <% tvShowsList.forEach(show => { %>
+            <div class="card">
+                <a href="/tvshows/detail/<%= show.id %>" class="card-link">
+                    <img src="<%= show.image %>" alt="<%= show.title %>">
+                    <div class="card-content">
+                        <h3><%= show.title %></h3>
+                        <div class="rating">
+                            <% for(let i = 0; i < 5; i++) { %>
+                                <% if(i < show.rating) { %>
+                                    ★
+                                <% } else { %>
+                                    ☆
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <p><%= show.description %></p>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    </div>
+    
+    <h3>TV Show Categories</h3>
+    <div class="genre-tags">
+        <% genres.forEach(genre => { %>
+            <span class="genre-tag"><%= genre %></span>
+        <% }); %>
+    </div>
+</section>
+
+<%- include('partials/footer') %> 
